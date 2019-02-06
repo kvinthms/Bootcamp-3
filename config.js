@@ -4,7 +4,7 @@
 
 module.exports = {
   db: {
-    uri: '', //place the URI of your mongo database here.
+    uri: 'mongodb://bootcamp:acc3ss@ds051720.mlab.com:51720/bootcamp3', //place the URI of your mongo database here.
   }
 };
 

@@ -9,7 +9,27 @@ var fs = require('fs'),
     Listing = require('./ListingSchema.js'), 
     config = require('./config');
 
+//var db = mongoose.connection;
+
+mongoose.connect(config.db.uri, {useNewUrlParser: true }, function(err) {
+    if (err) throw err;
+    else console.log('Successful connection');
+});
+
+
 /* Connect to your database */
+
+fs.readFile('listings.json', 'utf8', function (err, list) {
+    if (err) throw err;
+
+    var listings = JSON.parse(list);
+    listings.entries.forEach(function (listing) {
+        var listModel = new Listing(listing);
+        listModel.save(function (err) {
+            if (err) throw err;
+        })
+    })
+});
 
 /* 
   Instantiate a mongoose model for each listing object in the JSON file, 
